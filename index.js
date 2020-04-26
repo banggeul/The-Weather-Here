@@ -3,11 +3,12 @@ const Datastore = require('nedb');
 const fetch = require('node-fetch');
 require('dotenv').config();
 
-console.log(process.env);
+//console.log(process.env);
 
 const app = express();
-const port = 3000;
-app.listen(port, ()=>console.log("listening at 3000"));
+//do this before deploying since servers will decide the port number
+const port = process.env.PORT || 3000;
+app.listen(port, ()=>console.log(`Starting server at ${port}`));
 app.use(express.static('public/'));
 app.use(express.json({limit:'1mb'}));
 const database = new Datastore('database.db');
